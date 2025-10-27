@@ -353,20 +353,24 @@ footer {
 }
 
 
-/* Estilizando Missão, Visão e Valores como um Flexbox */
+/* ================================
+   🌟 MISSÃO, VISÃO E VALORES
+   ================================ */
 #Missão {
     display: flex;
     flex-direction: column; 
     gap: var(--espaco-4);
-    background: white; 
+    background: var(--card-bg); /* fundo adaptável ao tema */
     margin-bottom: var(--espaco-5);
     padding: var(--espaco-4);  
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra padrão */
-    border-radius: 12px; /* Adicionado para consistência */
+    box-shadow: var(--shadow-soft);
+    border-radius: 12px;
+    color: var(--text-color); /* texto adaptável ao tema */
+    transition: background var(--transition-speed), color var(--transition-speed);
 }
 
 #Missão h2 {
-    color: var(--cor-texto); 
+    color: var(--text-color);
     margin-bottom: var(--espaco-3);
 }
 
@@ -374,34 +378,41 @@ footer {
     display: flex;
     justify-content: space-around;
     gap: var(--espaco-3);
-    flex-wrap: wrap; /* Permite quebrar para telas menores */
+    flex-wrap: wrap;
     text-align: center;
 }
 
 #Missão p {
-    text-align: center; /* Centraliza o texto */
+    text-align: center;
     font-size: var(--tamanho-texto-grande);
-    max-width: none; /* Remove o limite anterior */
+    max-width: none;
     margin: 0;
-    flex-basis: 30%; /* Tenta ocupar cerca de 30% da largura (para 3 colunas) */
+    flex-basis: 30%;
+    color: var(--text-color); /* adapta a cor do parágrafo */
+    transition: color var(--transition-speed);
 }
 
-/* Destaque para o título de cada valor */
 #Missão strong {
-    display: block; /* Garante que o negrito fique em sua própria linha */
-    color: var(--cor-secundaria);
+    display: block;
+    color: var(--accent-color); /* destaque que muda com o tema */
     font-size: 1.1em;
     margin-bottom: var(--espaco-1);
+    transition: color var(--transition-speed);
 }
 
-
-/* Responsividade para a seção Missão */
+/* ================================
+   🌐 RESPONSIVIDADE
+   ================================ */
 @media (max-width: 600px) {
     .valores-container {
-        flex-direction: column; /* Empilha no mobile */
+        flex-direction: column; /* empilha os valores no mobile */
+        gap: var(--espaco-3);
+    }
+
+    #Missão p {
+        flex-basis: 100%;
     }
 }
-
 /* ==========================
    SEÇÃO DE CONTATO (Novo Estilo)
    ========================== */
@@ -664,3 +675,34 @@ main {
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
+/* ================================
+   🔹 Skip Link (Saltar para Conteúdo)
+   ================================ */
+.skip-link {
+    position: absolute;
+    top: -40px; /* escondido por padrão */
+    left: 0;
+    background: var(--accent-color);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 1000;
+    text-decoration: none;
+    transition: top 0.3s ease, background 0.3s ease, transform 0.2s ease;
+}
+
+/* Quando recebe foco (teclado) */
+.skip-link:focus {
+    top: 16px; /* aparece no topo da página */
+    transform: translateY(0);
+    outline: 3px solid var(--accent-hover);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Efeito leve de hover */
+.skip-link:hover {
+    background: var(--accent-hover);
+}
+
+

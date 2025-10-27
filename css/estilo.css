@@ -474,3 +474,122 @@ footer {
     padding: 5px 0;
     font-weight: bold;
 }
+/* ================================ */
+/* 🌗 TEMA MODERNO ACESSÍVEL        */
+/* ================================ */
+
+/* Variáveis padrão (modo claro) */
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #1c1c1c;
+  --card-bg: #ffffff;
+  --accent-color: #0077ff;
+  --accent-hover: #005fd4;
+  --border-color: #e0e0e0;
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --transition-speed: 0.35s;
+}
+
+/* Modo escuro */
+body[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --card-bg: #1e1e1e;
+  --accent-color: #4dabf7;
+  --accent-hover: #82c7ff;
+  --border-color: #2c2c2c;
+  --shadow-soft: 0 2px 8px rgba(255, 255, 255, 0.05);
+}
+
+/* Alto contraste */
+body.high-contrast {
+  --bg-color: #000000 !important;
+  --text-color: #ffff00 !important;
+  --card-bg: #000000 !important;
+  --accent-color: #ffff00 !important;
+  --accent-hover: #ffff00 !important;
+  --border-color: #ffffff !important;
+  filter: contrast(130%) brightness(110%);
+}
+
+/* ================================ */
+/* ELEMENTOS GERAIS (usar variáveis) */
+/* ================================ */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+header, footer, main, section, .card, form {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  transition: background var(--transition-speed), color var(--transition-speed), box-shadow var(--transition-speed);
+  border-color: var(--border-color);
+}
+
+/* Links e botões */
+a, button, .btn, .botao {
+  color: var(--accent-color);
+}
+
+a:hover, button:hover, .btn:hover, .botao:hover {
+  color: var(--accent-hover);
+}
+
+/* Botões principais */
+button, .btn, .botao {
+  background-color: var(--accent-color);
+  color: #000; /* No contraste, o texto dos botões fica legível */
+}
+
+body.high-contrast button, 
+body.high-contrast .btn, 
+body.high-contrast .botao {
+  background-color: var(--accent-color) !important;
+  color: #000 !important;
+}
+/* ==========================
+   SKIP LINK ACESSÍVEL
+   ========================== */
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-color);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  z-index: 1000;
+  text-decoration: none;
+  transition: top 0.3s ease, background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 16px;
+  outline: 3px solid #ffff00;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  background: #000;
+  color: #ffff00;
+}
+
+.skip-link:hover { background: var(--accent-hover); color: #fff; }
+
+/* ==========================
+   RESPONSIVIDADE
+   ========================== */
+@media (max-width: 768px) {
+  nav ul { flex-direction: column; gap: var(--espaco-1); }
+  nav a { display: block; padding: var(--espaco-1) 0; }
+}
+@media (max-width: 480px) {
+  header h1 { font-size: 1.4rem; }
+  main { padding: var(--espaco-2); }
+}

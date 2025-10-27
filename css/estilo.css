@@ -1,0 +1,476 @@
+/* ==========================
+    SISTEMA DE DESIGN - OUVIR & CUIDAR
+    ========================== */
+
+/* 🎨 Variáveis Globais */
+:root {
+    /* Paleta de Cores (8 cores) */
+    --cor-primaria: #006d77;
+    --cor-secundaria: #45827c;
+    --cor-destaque: #ffb703;
+    --cor-sucesso: #38b000;
+    --cor-erro: #d00000;
+    --cor-fundo: #f8f9fa;
+    --cor-texto: #212529;
+    --cor-neutra: #e9ecef;
+
+    /* Tipografia */
+    --fonte-principal: "Poppins", Arial, sans-serif;
+    --tamanho-titulo: 2.5rem;
+    --tamanho-subtitulo: 1.8rem;
+    --tamanho-texto-grande: 1.2rem;
+    --tamanho-texto: 1rem;
+    --tamanho-pequeno: 0.9rem;
+
+    /* Espaçamento (8px scale) */
+    --espaco-1: 8px;
+    --espaco-2: 16px;
+    --espaco-3: 24px;
+    --espaco-4: 32px;
+    --espaco-5: 48px;
+    --espaco-6: 64px;
+
+    /* Limite de Largura para o Conteúdo Centralizado */
+    --largura-max-conteudo: 900px; 
+}
+
+/* ==========================
+    ESTILOS GERAIS
+    ========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--fonte-principal);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+/* Centralização do Header e Navegação */
+header {
+    background-color: var(--cor-primaria);
+    color: white;
+    /* Ajustei o padding para usar as variáveis */
+    padding: var(--espaco-3) var(--espaco-2); 
+    text-align: center; /* Centraliza textos e parágrafos */
+}
+
+header h1 {
+    font-size: var(--tamanho-subtitulo);
+    margin-bottom: var(--espaco-1);
+}
+
+/* Estilo para a Navegação (NAV) */
+nav {
+    background-color: var(--cor-secundaria); /* Um contraste leve para a barra de navegação */
+    padding: var(--espaco-2) 0;
+}
+
+/* Centralizando os links de navegação */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* CENTRALIZA OS ITENS DO MENU */
+    max-width: var(--largura-max-conteudo);
+    margin: 0 auto;
+    gap: var(--espaco-4); /* Aumentei o espaçamento entre os links */
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    /* Adicionado o tamanho de fonte para consistência */
+    font-size: var(--tamanho-texto); 
+}
+
+nav a:hover {
+    color: var(--cor-destaque);
+}
+
+/* ==========================
+    CONTEÚDO PRINCIPAL (MAIN)
+    ========================== */
+
+main {
+    /* Define largura máxima e centraliza o conteúdo */
+    max-width: var(--largura-max-conteudo); 
+    margin: 0 auto; /* CENTRALIZA O CONTEÚDO */
+    padding: var(--espaco-4);
+    text-align: center; /* Centraliza textos, imagens, etc. dentro do main */
+}
+
+h2 {
+    font-size: var(--tamanho-subtitulo);
+    color: var(--cor-primaria);
+    margin-bottom: var(--espaco-2);
+    /* Garante que o título não fique centralizado em layouts maiores */
+    text-align: center; 
+}
+
+section {
+    margin-bottom: var(--espaco-5);
+    padding: var(--espaco-4);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+section p {
+    text-align: justify; /* Melhora a leitura do texto dentro das seções */
+    max-width: 700px;
+    margin: 0 auto var(--espaco-3) auto;
+}
+
+/* Adicionado um estilo para TODAS as imagens que não estão em cards */
+main img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 10px;
+    margin: var(--espaco-3) auto;
+    display: block; /* Essencial para centralizar a imagem */
+}
+
+/* ==========================
+    MENU RESPONSIVO (Ajustado para a nova estrutura)
+    ========================== */
+
+.menu-btn {
+    display: none; /* Mantido oculto, pois o menu já está centralizado */
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    /* Em telas menores, o menu deve ficar na vertical */
+    nav ul {
+        flex-direction: column;
+        gap: var(--espaco-1);
+    }
+
+    nav a {
+        display: block; /* Faz o link ocupar toda a largura para fácil clique */
+        padding: var(--espaco-1) 0;
+    }
+    
+    /* Para o texto do parágrafo ficar melhor em telas menores */
+    section p {
+        text-align: left; 
+    }
+}
+
+/* ==========================
+    CARDS DE PROJETOS (Mantido)
+    ========================== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--espaco-3);
+    text-align: left;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: var(--espaco-2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: var(--espaco-2);
+}
+
+/* ==========================
+    FORMULÁRIOS
+    ========================== */
+form {
+    background: white;
+    padding: var(--espaco-4) var(--espaco-5); 
+    border-radius: 12px;
+    max-width: 650px; 
+    margin: var(--espaco-4) auto; 
+    
+    /* DESTAQUE PRINCIPAL: Aumento de Sombra e Borda Sutil */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Sombra mais forte */
+    border: 2px solid var(--cor-secundaria); /* Borda sutil */
+    transition: all 0.3s ease-in-out; /* Adiciona uma transição suave */
+    
+    text-align: left; 
+}
+
+form:hover {
+    /* Efeito de destaque ao passar o mouse */
+    border-color: var(--cor-primaria); /* Borda fica mais intensa */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra ainda mais forte */
+}
+
+/* Estilizando o fieldset/legend (Opcional, mas melhora o visual) */
+fieldset {
+    border: 1px solid var(--cor-neutra);
+    padding: var(--espaco-3);
+    border-radius: 8px;
+    margin-bottom: var(--espaco-4);
+}
+
+legend {
+    font-size: var(--tamanho-texto-grande);
+    font-weight: 700;
+    color: var(--cor-primaria);
+    padding: 0 var(--espaco-2);
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+input, select {
+    width: 100%;
+    padding: var(--espaco-2);
+    margin-bottom: var(--espaco-2);
+    border: 1px solid var(--cor-neutra);
+    border-radius: 8px;
+}
+
+    button {
+    background: var(--cor-primaria); 
+    color: white;
+    border: none;
+    padding: var(--espaco-2) var(--espaco-4); 
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold; /* Deixa o texto do botão mais visível */
+    margin-top: var(--espaco-3);
+    
+    /* Adiciona destaque de sombra */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+button:hover {
+    background: var(--cor-destaque); /* Usa a cor de destaque no hover para um WOW */
+    color: var(--cor-texto); /* Garante que o texto fique legível no destaque */
+}
+
+button:hover {
+    background: var(--cor-primaria);
+}
+
+/* ==========================
+    FOOTER
+    ========================== */
+footer {
+    background: var(--cor-primaria);
+    color: white;
+    text-align: center;
+    padding: var(--espaco-3);
+   
+}
+
+/* ==========================
+    RESPONSIVIDADE EXTRA (Ajustado)
+    ========================== */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+
+    main {
+        padding: var(--espaco-2);
+    }
+}
+
+/* Estilo para Links que agem como Botões */
+.botao {
+    display: inline-block; /* Permite aplicar padding e margem */
+    background: var(--cor-destaque);
+    color: var(--cor-texto); /* Cor de texto que contraste bem com o destaque */
+    text-decoration: none;
+    font-weight: bold;
+    padding: var(--espaco-2) var(--espaco-3);
+    border-radius: 8px;
+    margin-top: var(--espaco-2);
+    transition: background 0.3s;
+}
+
+.botao:hover {
+    background: #ffc94d; /* Uma cor mais clara ao passar o mouse */
+}
+
+
+.formulario h2 {
+    color: var(--cor-primaria);
+    font-size: var(--tamanho-subtitulo);
+    margin-bottom: var(--espaco-4); /* Aumenta o espaço depois do título */
+    padding-bottom: var(--espaco-1);
+    border-bottom: 2px solid var(--cor-secundaria); /* Linha sutil de destaque */
+    display: inline-block; /* Ajusta a largura da linha à do texto */
+}
+
+/* ==========================
+   CONTEÚDO PRINCIPAL (MAIN) - Ajuste no Hero (Quem Somos)
+   ========================== */
+
+#sobre {
+    /* MUDANÇA: Usar uma cor mais forte (var(--cor-primaria)) com uma transparência no gradiente */
+    background: linear-gradient(135deg, var(--cor-primaria) 30%, var(--cor-secundaria) 100%);
+    color: white; /* Garante que o texto seja branco (alto contraste) */
+    padding: var(--espaco-6) var(--espaco-4); 
+    margin-bottom: var(--espaco-5);
+    border-radius: 15px; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
+    text-align: center;
+}
+
+#sobre h2 {
+    color: white; /* Mantém o título em branco */
+    /* ... (restante do h2) ... */
+}
+
+#sobre p {
+    color: #e9ecef; /* Um branco levemente cinza para o parágrafo (melhora a leitura) */
+    /* ... (restante do p) ... */
+}
+
+/* Garante que o STRONG (negrito) se destaque */
+#sobre strong {
+    color: var(--cor-texto); 
+    font-weight: 700;
+}
+
+
+/* Estilizando Missão, Visão e Valores como um Flexbox */
+#Missão {
+    display: flex;
+    flex-direction: column; 
+    gap: var(--espaco-4);
+    background: white; 
+    margin-bottom: var(--espaco-5);
+    padding: var(--espaco-4);  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra padrão */
+    border-radius: 12px; /* Adicionado para consistência */
+}
+
+#Missão h2 {
+    color: var(--cor-texto); 
+    margin-bottom: var(--espaco-3);
+}
+
+.valores-container {
+    display: flex;
+    justify-content: space-around;
+    gap: var(--espaco-3);
+    flex-wrap: wrap; /* Permite quebrar para telas menores */
+    text-align: center;
+}
+
+#Missão p {
+    text-align: center; /* Centraliza o texto */
+    font-size: var(--tamanho-texto-grande);
+    max-width: none; /* Remove o limite anterior */
+    margin: 0;
+    flex-basis: 30%; /* Tenta ocupar cerca de 30% da largura (para 3 colunas) */
+}
+
+/* Destaque para o título de cada valor */
+#Missão strong {
+    display: block; /* Garante que o negrito fique em sua própria linha */
+    color: var(--cor-secundaria);
+    font-size: 1.1em;
+    margin-bottom: var(--espaco-1);
+}
+
+
+/* Responsividade para a seção Missão */
+@media (max-width: 600px) {
+    .valores-container {
+        flex-direction: column; /* Empilha no mobile */
+    }
+}
+
+/* ==========================
+   SEÇÃO DE CONTATO (Novo Estilo)
+   ========================== */
+#Contato {
+    /* Fundo de destaque para a seção */
+    background-color: var(--cor-primaria); 
+    color: white; /* Cor do texto em branco para contraste */
+    padding: var(--espaco-5);
+    border-radius: 12px;
+    margin-bottom: var(--espaco-5); /* Garante espaço antes do footer */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra mais profunda para destacar */
+    text-align: center;
+}
+
+#Contato h2 {
+    color: var(--cordestaque); /* Título em cor de destaque */
+    margin-bottom: var(--espaco-4);
+    font-size: var(--tamanho-subtitulo);
+}
+/* ==========================
+   SEÇÃO DE CONTATO (Ajuste para Empilhamento)
+   ========================== */
+
+.contato-detalhes {
+    
+    display: flex;
+    flex-direction: column; 
+    
+    align-items: center; 
+    gap: var(--espaco-4); /* Aumenta o espaço entre os itens empilhados */
+    max-width: 600px; 
+    margin: 0 auto; /* Centraliza o container */
+}
+
+#Contato p {
+    text-align: center;
+    font-size: var(--tamanho-texto-grande);
+    max-width: 100%;
+    margin: 0;
+}
+
+/* Estilo para os ícones de emoji (melhor visual) */
+#Contato p span {
+    font-size: 1.5em; /* Aumenta o tamanho do ícone */
+    margin-right: var(--espaco-1);
+    vertical-align: middle; /* Alinha o ícone com o texto */
+    display: inline-block;
+}
+
+/* Responsividade para a seção Contato */
+@media (max-width: 600px) {
+    .contato-detalhes {
+        flex-direction: column; /* Empilha no mobile */
+        gap: var(--espaco-3);
+    }
+}
+
+.erro-validacao {
+    border: 2px solid #e74c3c !important; /* Vermelho mais moderno */
+    background-color: #fcebeb; /* Fundo levemente rosado */
+    box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
+}
+
+/* Estilo para a mensagem de erro */
+.mensagem-erro {
+    color: #c0392b; /* Texto vermelho escuro */
+    font-size: 0.9em;
+    margin-top: -10px; /* Aproxima do campo anterior */
+    margin-bottom: 15px; /* Espaço após a mensagem */
+    padding: 5px 0;
+    font-weight: bold;
+}

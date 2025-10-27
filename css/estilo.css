@@ -17,23 +17,19 @@
     --cor-texto: #212529;
     --cor-neutra: #e9ecef;
 
-    /* Tipografia */
+    /* Tipografia e Espaçamento... (MANTIDOS) */
     --fonte-principal: "Poppins", Arial, sans-serif;
     --tamanho-titulo: 2.5rem;
     --tamanho-subtitulo: 1.8rem;
     --tamanho-texto-grande: 1.2rem;
     --tamanho-texto: 1rem;
     --tamanho-pequeno: 0.9rem;
-
-    /* Espaçamento (8px scale) */
     --espaco-1: 8px;
     --espaco-2: 16px;
     --espaco-3: 24px;
     --espaco-4: 32px;
     --espaco-5: 48px;
     --espaco-6: 64px;
-
-    /* Limite de Largura para o Conteúdo Centralizado */
     --largura-max-conteudo: 900px; 
 
     /* --- Variáveis de tema (MODO CLARO) --- */
@@ -46,8 +42,8 @@
     --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
     --transition-speed: 0.35s;
 
-    /* --- Variáveis de Cabeçalho e Rodapé (Para texto claro sobre fundo colorido) --- */
-    --header-footer-text-color: #ffffff; /* Texto branco padrão */
+    /* Variável para texto em áreas coloridas (Header/Footer/Nav) */
+    --colored-area-text: #ffffff; 
 }
 
 /* --------------------------
@@ -62,6 +58,7 @@
     --accent-hover: #007b83;
     --border-color: #2b2b2b;
     --shadow-soft: 0 2px 8px rgba(255,255,255,0.03);
+    --colored-area-text: #e0e0e0; /* Texto mais claro no modo escuro */
   }
 }
 
@@ -74,21 +71,25 @@ body[data-theme="dark"] {
     --accent-hover: #007b83;
     --border-color: #2b2b2b;
     --shadow-soft: 0 2px 8px rgba(255,255,255,0.03);
+    --colored-area-text: #e0e0e0; 
 }
 
 /* --------------------------
-   ALTO CONTRASTE (CORRIGIDO)
+   ALTO CONTRASTE (CORRIGIDO PARA MANTER LEGIBILIDADE)
    -------------------------- */
 body.high-contrast {
-    /* Mapeamento simples de cores para garantir alta legibilidade */
+    /* Mapeamento para Alto Contraste */
     --bg-color: #000000 !important;
-    --text-color: #ffffff !important; /* Branco puro, mais legível */
+    --text-color: #ffffff !important; 
     --card-bg: #000000 !important;
-    --accent-color: #ffff00 !important; /* Amarelo no destaque (botões, links) */
-    --accent-hover: #ffffff !important;
+    --accent-color: #ffff00 !important; /* Destaque primário */
+    --accent-hover: #ffffff !important; /* Hover e links brancos */
     --border-color: #ffffff !important;
     --shadow-soft: none !important;
-    --header-footer-text-color: #000000 !important; /* Texto preto sobre fundo amarelo */
+    --colored-area-text: #000000 !important; /* Texto preto sobre fundo amarelo/claro */
+    
+    /* Força o texto em todo o body a ser branco, ignorando exceções problemáticas */
+    color: var(--text-color) !important;
 }
 
 /* ===========================
@@ -107,8 +108,8 @@ body {
 /* Centralização do Header e Navegação */
 header {
     background-color: var(--accent-color);
-    /* CORREÇÃO: Usa a nova variável para texto em header/footer */
-    color: var(--header-footer-text-color); 
+    /* Usa a variável de texto para áreas coloridas */
+    color: var(--colored-area-text); 
     padding: var(--espaco-3) var(--espaco-2);
     text-align: center;
     transition: background-color var(--transition-speed), color var(--transition-speed);
@@ -116,11 +117,10 @@ header {
 header h1 {
     font-size: var(--tamanho-subtitulo);
     margin-bottom: var(--espaco-1);
-    /* CORREÇÃO: Garante que o texto do H1 use a cor do header */
     color: inherit; 
 }
 
-/* NAV - mantido visual, mas texto passa a usar variáveis */
+/* NAV - A cor de fundo é fixa, mas o texto é branco */
 nav {
     background-color: var(--cor-secundaria); 
     padding: var(--espaco-2) 0;
@@ -135,12 +135,21 @@ nav ul {
 }
 nav a {
     text-decoration: none;
-    color: white; /* nav é colorida por design, texto fixo branco */
+    color: white; /* Texto fixo branco na nav colorida */
     font-weight: bold;
     transition: 0.3s;
     font-size: var(--tamanho-texto);
 }
 nav a:hover { color: var(--cor-destaque); }
+/* Correção Alto Contraste para NAV */
+body.high-contrast nav a {
+    color: var(--text-color) !important; /* Branco no modo HC (fundo preto) */
+}
+body.high-contrast nav {
+    background-color: var(--bg-color) !important; /* Fundo preto no modo HC */
+    border-bottom: 2px solid var(--border-color) !important;
+}
+
 
 /* ===========================
    CONTEÚDO PRINCIPAL (MAIN)
@@ -165,6 +174,7 @@ section {
     background: var(--card-bg);
     border-radius: 12px;
     box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color); /* Adicionado para visibilidade no modo escuro/HC */
     transition: background var(--transition-speed), color var(--transition-speed);
 }
 
@@ -175,7 +185,7 @@ section p {
     color: var(--text-color);
 }
 
-/* imagens */
+/* imagens (MANTIDO) */
 main img {
     width: 100%;
     max-width: 500px;
@@ -186,7 +196,7 @@ main img {
 }
 
 /* ===========================
-   MENU RESPONSIVO
+   MENU RESPONSIVO (MANTIDO)
    =========================== */
 .menu-btn { display: none; font-size: 1.8rem; cursor: pointer; }
 
@@ -197,7 +207,7 @@ main img {
 }
 
 /* ===========================
-   CARDS DE PROJETOS
+   CARDS DE PROJETOS (MANTIDO)
    =========================== */
 .cards {
     display: grid;
@@ -210,13 +220,14 @@ main img {
     border-radius: 12px;
     padding: var(--espaco-2);
     box-shadow: var(--shadow-soft);
+    border: 1px solid var(--border-color);
     transition: transform 0.3s ease, box-shadow var(--transition-speed);
 }
 .card:hover { transform: translateY(-5px); }
 .card img { width: 100%; border-radius: 10px; margin-bottom: var(--espaco-2); }
 
 /* ===========================
-   FORMULÁRIOS
+   FORMULÁRIOS (MANTIDO)
    =========================== */
 form {
     background: var(--card-bg);
@@ -246,10 +257,10 @@ input, select, textarea {
     color: var(--text-color);
 }
 
-/* botão padrão (mantive sua aparência) */
+/* botão padrão */
 button {
     background: var(--accent-color);
-    color: #fff;
+    color: var(--colored-area-text);
     border: none;
     padding: var(--espaco-2) var(--espaco-4);
     border-radius: 8px;
@@ -259,15 +270,17 @@ button {
     margin-top: var(--espaco-3);
     box-shadow: 0 4px 6px rgba(0,0,0,0.12);
 }
-button:hover { background: var(--cor-destaque); color: var(--text-color); }
+button:hover { background: var(--cor-destaque); color: var(--cor-texto); }
+body.high-contrast button:hover { background: #ffffff !important; color: #000000 !important; }
+
 
 /* ===========================
    FOOTER
    =========================== */
 footer {
     background: var(--accent-color);
-    /* CORREÇÃO: Usa a nova variável para texto em header/footer */
-    color: var(--header-footer-text-color); 
+    /* Usa a variável de texto para áreas coloridas */
+    color: var(--colored-area-text); 
     text-align: center;
     padding: var(--espaco-3);
 }
@@ -289,7 +302,7 @@ footer {
 .botao:hover { background: #ffc94d; }
 
 /* ===========================
-   SEÇÃO SOBRE (mantive gradiente mas forço texto com variável)
+   SEÇÃO SOBRE (MANTIDO)
    =========================== */
 #sobre {
     background: linear-gradient(135deg, var(--cor-primaria) 30%, var(--cor-secundaria) 100%);
@@ -305,26 +318,21 @@ footer {
 #sobre strong { color: var(--text-color); font-weight:700; }
 
 /* ================================
-   🌟 MISSÃO, VISÃO E VALORES
+   🌟 MISSÃO, VISÃO E VALORES (MANTIDO)
    ================================ */
 #Missão {
     display: flex;
     flex-direction: column; 
     gap: var(--espaco-4);
-    background: var(--card-bg); /* fundo adaptável ao tema */
+    background: var(--card-bg); 
     margin-bottom: var(--espaco-5);
     padding: var(--espaco-4);  
     box-shadow: var(--shadow-soft);
     border-radius: 12px;
-    color: var(--text-color); /* texto adaptável ao tema */
+    color: var(--text-color); 
     transition: background var(--transition-speed), color var(--transition-speed);
 }
-
-#Missão h2 {
-    color: var(--text-color);
-    margin-bottom: var(--espaco-3);
-}
-
+#Missão h2 { color: var(--text-color); margin-bottom: var(--espaco-3); }
 .valores-container {
     display: flex;
     justify-content: space-around;
@@ -332,43 +340,35 @@ footer {
     flex-wrap: wrap;
     text-align: center;
 }
-
 #Missão p {
     text-align: center;
     font-size: var(--tamanho-texto-grande);
     max-width: none;
     margin: 0;
     flex-basis: 30%;
-    color: var(--text-color); /* adapta a cor do parágrafo */
+    color: var(--text-color); 
     transition: color var(--transition-speed);
 }
-
 #Missão strong {
     display: block;
-    color: var(--accent-color); /* destaque que muda com o tema */
+    color: var(--accent-color); 
     font-size: 1.1em;
     margin-bottom: var(--espaco-1);
     transition: color var(--transition-speed);
 }
 
 /* ================================
-   🌐 RESPONSIVIDADE
+   🌐 RESPONSIVIDADE (MANTIDO)
    ================================ */
 @media (max-width: 600px) {
-    .valores-container {
-        flex-direction: column; /* empilha os valores no mobile */
-        gap: var(--espaco-3);
-    }
-
-    #Missão p {
-        flex-basis: 100%;
-    }
+    .valores-container { flex-direction: column; gap: var(--espaco-3); }
+    #Missão p { flex-basis: 100%; }
 }
+
 /* ===========================
-   ERROS E MENSAGENS
+   ERROS E MENSAGENS (MANTIDO)
    =========================== */
 .erro-validacao {
-    /* Mapeamento de Alto Contraste para Erro */
     border: 2px solid var(--cor-erro) !important;
     background-color: var(--cor-neutra);
     box-shadow: 0 0 5px rgba(231,76,60,0.5);
@@ -385,6 +385,9 @@ body.high-contrast .erro-validacao {
     padding:5px 0; 
     font-weight:bold; 
 }
+body.high-contrast .mensagem-erro {
+    color: #ffffff !important;
+}
 
 /* ===========================
    LINKS E BOTÕES (com suporte alto-contraste)
@@ -393,25 +396,27 @@ a, button, .btn, .botao {
     color: var(--accent-color); 
     transition: color var(--transition-speed), background-color var(--transition-speed); 
 }
-a:hover, button:hover, .btn:hover, .botao:hover { color: var(--accent-hover); }
+a:hover, button:hover, .btn:hover, .botao:hover { 
+    color: var(--accent-hover); 
+}
 
 button, .btn, .botao { 
     background-color: var(--accent-color); 
-    color: #fff; 
+    color: var(--colored-area-text); 
 }
 
-/* CORREÇÃO: Garante o contraste dos botões no modo alto contraste */
+/* Garante o contraste dos botões no modo alto contraste */
 body.high-contrast button, body.high-contrast .btn, body.high-contrast .botao {
-    background-color: var(--accent-color) !important; /* Amarelo */
-    color: #000000 !important; /* Texto preto para contraste no botão amarelo */
+    background-color: var(--accent-color) !important; 
+    color: #000000 !important; 
     border: 2px solid #000000 !important;
 }
 body.high-contrast a:hover {
-    color: var(--text-color) !important; /* Branco para hover no texto normal */
+    color: var(--text-color) !important; 
 }
 
 /* ===========================
-   ANIMAÇÕES SUAVES
+   ANIMAÇÕES SUAVES (MANTIDO)
    =========================== */
 @keyframes fadeIn { from { opacity:0; transform:translateY(5px);} to { opacity:1; transform:translateY(0);} }
 main { animation: fadeIn 0.5s ease; }
@@ -419,14 +424,14 @@ main { animation: fadeIn 0.5s ease; }
 @keyframes pulseAnim { 0% { transform:scale(1);} 50%{transform:scale(1.1);} 100%{transform:scale(1);} }
 
 /* ================================
-   BOTÃO "SALTAR PARA O CONTEÚDO PRINCIPAL"
+   BOTÃO "SALTAR PARA O CONTEÚDO PRINCIPAL" (MANTIDO)
    ================================ */
 #skip-to-content {
   position: absolute;
   top: 16px;
   left: 16px;
   background-color: var(--accent-color);
-  color: var(--header-footer-text-color); /* Usa a variável que garante contraste */
+  color: var(--colored-area-text); 
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: bold;
@@ -435,12 +440,7 @@ main { animation: fadeIn 0.5s ease; }
   transition: transform 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
   opacity: 0.9;
   pointer-events: auto;
-
-  /* Tamanho grande o suficiente para ser clicável */
   font-size: 1rem;
-
-  /* Tornando o botão perceptível para leitores de tela */
-  /* aria-label: "Saltar para o conteúdo principal"; -> REMOVIDO DO CSS, DEVE ESTAR NO HTML */
 }
 
 /* Ao receber foco (tab navigation) */
@@ -460,11 +460,11 @@ main { animation: fadeIn 0.5s ease; }
 /* Adaptação para temas escuro/alto contraste */
 body[data-theme="dark"] #skip-to-content {
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--colored-area-text);
 }
 
 body.high-contrast #skip-to-content {
   background-color: #ffff00 !important;
-  color: #000000 !important; /* Texto preto sobre fundo amarelo */
+  color: #000000 !important; 
   outline: 3px solid #000000 !important;
 }

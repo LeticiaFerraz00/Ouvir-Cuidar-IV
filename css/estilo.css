@@ -675,4 +675,34 @@ main {
   50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
+/* ================================
+   🔹 Skip Link (Saltar para Conteúdo)
+   ================================ */
+.skip-link {
+    position: absolute;
+    top: -40px; /* escondido por padrão */
+    left: 0;
+    background: var(--accent-color);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 1000;
+    text-decoration: none;
+    transition: top 0.3s ease, background 0.3s ease, transform 0.2s ease;
+}
+
+/* Quando recebe foco (teclado) */
+.skip-link:focus {
+    top: 16px; /* aparece no topo da página */
+    transform: translateY(0);
+    outline: 3px solid var(--accent-hover);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Efeito leve de hover */
+.skip-link:hover {
+    background: var(--accent-hover);
+}
+
 

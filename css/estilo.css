@@ -1,17 +1,17 @@
 /* ==========================
-   SISTEMA DE DESIGN - OUVIR & CUIDAR
-   ========================== */
+    SISTEMA DE DESIGN - OUVIR & CUIDAR
+    ========================== */
 
-/* 🎨 Variáveis Globais (AJUSTADAS PARA CONTRASTE E ACESSIBILIDADE) */
+/* 🎨 Variáveis Globais */
 :root {
-    /* Paleta de Cores (8 cores) - Cores originais (Modo Claro Padrão) */
-    --cor-primaria: #006d77; /* Contraste 8.7:1 no fundo branco */
-    --cor-secundaria: #45827c; /* Contraste 6.4:1 no fundo branco */
+    /* Paleta de Cores (8 cores) */
+    --cor-primaria: #006d77;
+    --cor-secundaria: #45827c;
     --cor-destaque: #ffb703;
     --cor-sucesso: #38b000;
     --cor-erro: #d00000;
     --cor-fundo: #f8f9fa;
-    --cor-texto: #212529; /* Contraste 16.5:1 no fundo branco */
+    --cor-texto: #212529;
     --cor-neutra: #e9ecef;
 
     /* Tipografia */
@@ -31,132 +31,12 @@
     --espaco-6: 64px;
 
     /* Limite de Largura para o Conteúdo Centralizado */
-    --largura-max-conteudo: 900px;
+    --largura-max-conteudo: 900px; 
 }
-
-/* ==========================================================
-   WCAG 2.1 AA - MODO ESCURO (prefers-color-scheme)
-   ========================================================== */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --cor-fundo: #121212;
-        --cor-texto: #e0e0e0;
-        --cor-primaria: #084c4f; /* Versão mais escura */
-        --cor-secundaria: #3a5a5a; /* Versão mais escura */
-        --cor-neutra: #212121;
-    }
-    body {
-        background-color: var(--cor-fundo);
-        color: var(--cor-texto);
-    }
-    /* Inverte cores de fundo em seções e cards */
-    section, .card, form {
-        background: var(--cor-neutra);
-        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
-    }
-    header, footer {
-        background-color: var(--cor-primaria);
-    }
-    /* Garante que o texto dentro de 'sobre' permaneça legível */
-    #sobre {
-        background: linear-gradient(135deg, var(--cor-primaria) 30%, var(--cor-secundaria) 100%) !important;
-    }
-    #sobre strong {
-        color: var(--cor-destaque);
-    }
-}
-
-/* ==========================================================
-   WCAG 2.1 AA - CLASSE HIGH-CONTRAST (Toggle)
-   ========================================================== */
-body.high-contrast {
-    /* Cores de Alto Contraste */
-    --cor-fundo: black;
-    --cor-texto: yellow;
-    --cor-primaria: #005691; 
-    --cor-secundaria: #419D78; 
-    --cor-destaque: #ff0000;
-    --cor-neutra: #333;
-}
-
-body.high-contrast a {
-    text-decoration: underline; /* Acessibilidade: sublinhar links */
-    font-weight: bold;
-}
-
-body.high-contrast header, body.high-contrast footer, body.high-contrast nav, body.high-contrast .botao, body.high-contrast button {
-    background-color: var(--cor-primaria) !important;
-    color: var(--cor-texto) !important;
-    border: 2px solid var(--cor-texto) !important;
-}
-
-body.high-contrast section, body.high-contrast .card, body.high-contrast form {
-    background: var(--cor-neutra) !important;
-    color: var(--cor-texto) !important;
-    border: 2px solid var(--cor-texto) !important;
-    box-shadow: none !important;
-}
-
-body.high-contrast input, body.high-contrast select {
-    background: black !important;
-    color: yellow !important;
-    border: 2px solid var(--cor-texto) !important;
-}
-
-body.high-contrast button:hover {
-    background: var(--cor-secundaria) !important;
-}
-
-
-/* ==========================================================
-   WCAG 2.1 AA - FOCO DE TECLADO E SKIP LINK
-   ========================================================== */
-
-/* Foco de Teclado Visível (Critério 2.4.7) */
-a:focus, button:focus, input:focus, select:focus {
-    outline: 4px solid var(--cor-destaque); /* Aumenta o contorno para alto contraste */
-    outline-offset: 2px;
-}
-
-/* Skip Link (Critério 2.4.1) */
-.skip-link {
-    position: absolute;
-    left: -9999px;
-    background: var(--cor-destaque);
-    color: var(--cor-texto);
-    padding: 10px;
-    z-index: 1000;
-}
-.skip-link:focus {
-    left: 50%;
-    transform: translateX(-50%);
-    top: 10px;
-}
-
-/* Toggle Contrast Button */
-#toggle-contrast {
-    position: fixed;
-    bottom: var(--espaco-3);
-    right: var(--espaco-3);
-    z-index: 999;
-    font-size: 1.5rem;
-    padding: var(--espaco-2);
-    border-radius: 50%;
-    width: var(--espaco-5);
-    height: var(--espaco-5);
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--cor-secundaria);
-    color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
 
 /* ==========================
-   ESTILOS GERAIS
-   ========================== */
+    ESTILOS GERAIS
+    ========================== */
 * {
     margin: 0;
     padding: 0;
@@ -174,8 +54,9 @@ body {
 header {
     background-color: var(--cor-primaria);
     color: white;
-    padding: var(--espaco-3) var(--espaco-2);
-    text-align: center;
+    /* Ajustei o padding para usar as variáveis */
+    padding: var(--espaco-3) var(--espaco-2); 
+    text-align: center; /* Centraliza textos e parágrafos */
 }
 
 header h1 {
@@ -185,7 +66,7 @@ header h1 {
 
 /* Estilo para a Navegação (NAV) */
 nav {
-    background-color: var(--cor-secundaria);
+    background-color: var(--cor-secundaria); /* Um contraste leve para a barra de navegação */
     padding: var(--espaco-2) 0;
 }
 
@@ -193,10 +74,10 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* CENTRALIZA OS ITENS DO MENU */
     max-width: var(--largura-max-conteudo);
     margin: 0 auto;
-    gap: var(--espaco-4);
+    gap: var(--espaco-4); /* Aumentei o espaçamento entre os links */
 }
 
 nav a {
@@ -204,7 +85,8 @@ nav a {
     color: white;
     font-weight: bold;
     transition: 0.3s;
-    font-size: var(--tamanho-texto);
+    /* Adicionado o tamanho de fonte para consistência */
+    font-size: var(--tamanho-texto); 
 }
 
 nav a:hover {
@@ -212,21 +94,23 @@ nav a:hover {
 }
 
 /* ==========================
-   CONTEÚDO PRINCIPAL (MAIN)
-   ========================== */
+    CONTEÚDO PRINCIPAL (MAIN)
+    ========================== */
 
 main {
-    max-width: var(--largura-max-conteudo);
-    margin: 0 auto;
+    /* Define largura máxima e centraliza o conteúdo */
+    max-width: var(--largura-max-conteudo); 
+    margin: 0 auto; /* CENTRALIZA O CONTEÚDO */
     padding: var(--espaco-4);
-    text-align: center;
+    text-align: center; /* Centraliza textos, imagens, etc. dentro do main */
 }
 
 h2 {
     font-size: var(--tamanho-subtitulo);
     color: var(--cor-primaria);
     margin-bottom: var(--espaco-2);
-    text-align: center;
+    /* Garante que o título não fique centralizado em layouts maiores */
+    text-align: center; 
 }
 
 section {
@@ -238,7 +122,7 @@ section {
 }
 
 section p {
-    text-align: justify;
+    text-align: justify; /* Melhora a leitura do texto dentro das seções */
     max-width: 700px;
     margin: 0 auto var(--espaco-3) auto;
 }
@@ -250,15 +134,15 @@ main img {
     height: auto;
     border-radius: 10px;
     margin: var(--espaco-3) auto;
-    display: block;
+    display: block; /* Essencial para centralizar a imagem */
 }
 
 /* ==========================
-   MENU RESPONSIVO (Ajustado para a nova estrutura)
-   ========================== */
+    MENU RESPONSIVO (Ajustado para a nova estrutura)
+    ========================== */
 
 .menu-btn {
-    display: none;
+    display: none; /* Mantido oculto, pois o menu já está centralizado */
     font-size: 1.8rem;
     cursor: pointer;
 }
@@ -271,19 +155,19 @@ main img {
     }
 
     nav a {
-        display: block;
+        display: block; /* Faz o link ocupar toda a largura para fácil clique */
         padding: var(--espaco-1) 0;
     }
-
+    
     /* Para o texto do parágrafo ficar melhor em telas menores */
     section p {
-        text-align: left;
+        text-align: left; 
     }
 }
 
 /* ==========================
-   CARDS DE PROJETOS (Mantido)
-   ========================== */
+    CARDS DE PROJETOS (Mantido)
+    ========================== */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -310,26 +194,27 @@ main img {
 }
 
 /* ==========================
-   FORMULÁRIOS
-   ========================== */
+    FORMULÁRIOS
+    ========================== */
 form {
     background: white;
-    padding: var(--espaco-4) var(--espaco-5);
+    padding: var(--espaco-4) var(--espaco-5); 
     border-radius: 12px;
-    max-width: 650px;
-    margin: var(--espaco-4) auto;
-
+    max-width: 650px; 
+    margin: var(--espaco-4) auto; 
+    
     /* DESTAQUE PRINCIPAL: Aumento de Sombra e Borda Sutil */
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
-    border: 2px solid var(--cor-secundaria);
-    transition: all 0.3s ease-in-out;
-    text-align: left;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15); /* Sombra mais forte */
+    border: 2px solid var(--cor-secundaria); /* Borda sutil */
+    transition: all 0.3s ease-in-out; /* Adiciona uma transição suave */
+    
+    text-align: left; 
 }
 
 form:hover {
     /* Efeito de destaque ao passar o mouse */
-    border-color: var(--cor-primaria);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border-color: var(--cor-primaria); /* Borda fica mais intensa */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra ainda mais forte */
 }
 
 /* Estilizando o fieldset/legend (Opcional, mas melhora o visual) */
@@ -361,41 +246,44 @@ input, select {
     border-radius: 8px;
 }
 
-button {
-    background: var(--cor-primaria);
+    button {
+    background: var(--cor-primaria); 
     color: white;
     border: none;
-    padding: var(--espaco-2) var(--espaco-4);
+    padding: var(--espaco-2) var(--espaco-4); 
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
-    font-weight: bold;
+    font-weight: bold; /* Deixa o texto do botão mais visível */
     margin-top: var(--espaco-3);
-
+    
     /* Adiciona destaque de sombra */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 button:hover {
-    background: var(--cor-destaque);
-    color: var(--cor-texto);
+    background: var(--cor-destaque); /* Usa a cor de destaque no hover para um WOW */
+    color: var(--cor-texto); /* Garante que o texto fique legível no destaque */
 }
 
+button:hover {
+    background: var(--cor-primaria);
+}
 
 /* ==========================
-   FOOTER
-   ========================== */
+    FOOTER
+    ========================== */
 footer {
     background: var(--cor-primaria);
     color: white;
     text-align: center;
     padding: var(--espaco-3);
-
+   
 }
 
 /* ==========================
-   RESPONSIVIDADE EXTRA (Ajustado)
-   ========================== */
+    RESPONSIVIDADE EXTRA (Ajustado)
+    ========================== */
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.4rem;
@@ -408,9 +296,9 @@ footer {
 
 /* Estilo para Links que agem como Botões */
 .botao {
-    display: inline-block;
+    display: inline-block; /* Permite aplicar padding e margem */
     background: var(--cor-destaque);
-    color: var(--cor-texto);
+    color: var(--cor-texto); /* Cor de texto que contraste bem com o destaque */
     text-decoration: none;
     font-weight: bold;
     padding: var(--espaco-2) var(--espaco-3);
@@ -420,17 +308,17 @@ footer {
 }
 
 .botao:hover {
-    background: #ffc94d;
+    background: #ffc94d; /* Uma cor mais clara ao passar o mouse */
 }
 
 
 .formulario h2 {
     color: var(--cor-primaria);
     font-size: var(--tamanho-subtitulo);
-    margin-bottom: var(--espaco-4);
+    margin-bottom: var(--espaco-4); /* Aumenta o espaço depois do título */
     padding-bottom: var(--espaco-1);
-    border-bottom: 2px solid var(--cor-secundaria);
-    display: inline-block;
+    border-bottom: 2px solid var(--cor-secundaria); /* Linha sutil de destaque */
+    display: inline-block; /* Ajusta a largura da linha à do texto */
 }
 
 /* ==========================
@@ -438,26 +326,29 @@ footer {
    ========================== */
 
 #sobre {
+    /* MUDANÇA: Usar uma cor mais forte (var(--cor-primaria)) com uma transparência no gradiente */
     background: linear-gradient(135deg, var(--cor-primaria) 30%, var(--cor-secundaria) 100%);
-    color: white;
-    padding: var(--espaco-6) var(--espaco-4);
+    color: white; /* Garante que o texto seja branco (alto contraste) */
+    padding: var(--espaco-6) var(--espaco-4); 
     margin-bottom: var(--espaco-5);
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 15px; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); 
     text-align: center;
 }
 
 #sobre h2 {
-    color: white;
+    color: white; /* Mantém o título em branco */
+    /* ... (restante do h2) ... */
 }
 
 #sobre p {
-    color: #e9ecef;
+    color: #e9ecef; /* Um branco levemente cinza para o parágrafo (melhora a leitura) */
+    /* ... (restante do p) ... */
 }
 
 /* Garante que o STRONG (negrito) se destaque */
 #sobre strong {
-    color: var(--cor-texto);
+    color: var(--cor-texto); 
     font-weight: 700;
 }
 
@@ -465,17 +356,17 @@ footer {
 /* Estilizando Missão, Visão e Valores como um Flexbox */
 #Missão {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     gap: var(--espaco-4);
-    background: white;
+    background: white; 
     margin-bottom: var(--espaco-5);
-    padding: var(--espaco-4);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    border-radius: 12px;
+    padding: var(--espaco-4);  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra padrão */
+    border-radius: 12px; /* Adicionado para consistência */
 }
 
 #Missão h2 {
-    color: var(--cor-texto);
+    color: var(--cor-texto); 
     margin-bottom: var(--espaco-3);
 }
 
@@ -483,21 +374,21 @@ footer {
     display: flex;
     justify-content: space-around;
     gap: var(--espaco-3);
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Permite quebrar para telas menores */
     text-align: center;
 }
 
 #Missão p {
-    text-align: center;
+    text-align: center; /* Centraliza o texto */
     font-size: var(--tamanho-texto-grande);
-    max-width: none;
+    max-width: none; /* Remove o limite anterior */
     margin: 0;
-    flex-basis: 30%;
+    flex-basis: 30%; /* Tenta ocupar cerca de 30% da largura (para 3 colunas) */
 }
 
 /* Destaque para o título de cada valor */
 #Missão strong {
-    display: block;
+    display: block; /* Garante que o negrito fique em sua própria linha */
     color: var(--cor-secundaria);
     font-size: 1.1em;
     margin-bottom: var(--espaco-1);
@@ -507,7 +398,7 @@ footer {
 /* Responsividade para a seção Missão */
 @media (max-width: 600px) {
     .valores-container {
-        flex-direction: column;
+        flex-direction: column; /* Empilha no mobile */
     }
 }
 
@@ -515,18 +406,18 @@ footer {
    SEÇÃO DE CONTATO (Novo Estilo)
    ========================== */
 #Contato {
-    background-color: var(--cor-primaria);
-    color: white;
+    /* Fundo de destaque para a seção */
+    background-color: var(--cor-primaria); 
+    color: white; /* Cor do texto em branco para contraste */
     padding: var(--espaco-5);
     border-radius: 12px;
-    margin-bottom: var(--espaco-5);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: var(--espaco-5); /* Garante espaço antes do footer */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra mais profunda para destacar */
     text-align: center;
 }
 
 #Contato h2 {
-    /* CORRIGIDO: A variável 'cordestaque' foi corrigida para 'cor-destaque' */
-    color: var(--cor-destaque); 
+    color: var(--cordestaque); /* Título em cor de destaque */
     margin-bottom: var(--espaco-4);
     font-size: var(--tamanho-subtitulo);
 }
@@ -535,14 +426,14 @@ footer {
    ========================== */
 
 .contato-detalhes {
-
+    
     display: flex;
-    flex-direction: column;
-
-    align-items: center;
-    gap: var(--espaco-4);
-    max-width: 600px;
-    margin: 0 auto;
+    flex-direction: column; 
+    
+    align-items: center; 
+    gap: var(--espaco-4); /* Aumenta o espaço entre os itens empilhados */
+    max-width: 600px; 
+    margin: 0 auto; /* Centraliza o container */
 }
 
 #Contato p {
@@ -554,148 +445,222 @@ footer {
 
 /* Estilo para os ícones de emoji (melhor visual) */
 #Contato p span {
-    font-size: 1.5em;
+    font-size: 1.5em; /* Aumenta o tamanho do ícone */
     margin-right: var(--espaco-1);
-    vertical-align: middle;
+    vertical-align: middle; /* Alinha o ícone com o texto */
     display: inline-block;
 }
 
 /* Responsividade para a seção Contato */
 @media (max-width: 600px) {
     .contato-detalhes {
-        flex-direction: column;
+        flex-direction: column; /* Empilha no mobile */
         gap: var(--espaco-3);
     }
 }
 
 .erro-validacao {
-    border: 2px solid #e74c3c !important;
-    background-color: #fcebeb;
+    border: 2px solid #e74c3c !important; /* Vermelho mais moderno */
+    background-color: #fcebeb; /* Fundo levemente rosado */
     box-shadow: 0 0 5px rgba(231, 76, 60, 0.5);
 }
 
 /* Estilo para a mensagem de erro */
 .mensagem-erro {
-    color: #c0392b;
+    color: #c0392b; /* Texto vermelho escuro */
     font-size: 0.9em;
-    margin-top: -10px;
-    margin-bottom: 15px;
+    margin-top: -10px; /* Aproxima do campo anterior */
+    margin-bottom: 15px; /* Espaço após a mensagem */
     padding: 5px 0;
     font-weight: bold;
 }
 
-/* ==========================================================
-   MODO CLARO E ESCURO - ELEGANTE + ACESSÍVEL
-   ========================================================== */
 
-/* 🌞 Modo Claro (padrão) */
-[data-theme="light"] {
-  --cor-fundo: #f8f9fa;
-  --cor-texto: #1a1a1a;
-  --cor-primaria: #006d77;
-  --cor-secundaria: #45827c;
-  --cor-destaque: #ffb703;
-  --cor-neutra: #e9ecef;
+/* ================================
+   🌗 TEMA MODERNO ACESSÍVEL
+   ================================ */
+
+/* Variáveis padrão (modo claro) */
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #1c1c1c;
+  --card-bg: #ffffff;
+  --accent-color: #0077ff;
+  --accent-hover: #005fd4;
+  --border-color: #e0e0e0;
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --transition-speed: 0.35s;
 }
 
-/* 🌙 Modo Escuro (suave e moderno) */
-[data-theme="dark"] {
-  --cor-fundo: #0e1113;
-  --cor-texto: #e9ecef;
-  --cor-primaria: #00adb5;
-  --cor-secundaria: #007b83;
-  --cor-destaque: #ffd369;
-  --cor-neutra: #1e2326;
+/* Modo escuro */
+body[data-theme="dark"] {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --card-bg: #1e1e1e;
+  --accent-color: #4dabf7;
+  --accent-hover: #82c7ff;
+  --border-color: #2c2c2c;
+  --shadow-soft: 0 2px 8px rgba(255, 255, 255, 0.05);
 }
 
-/* 🎨 Estilo Global */
-body {
-  background-color: var(--cor-fundo);
-  color: var(--cor-texto);
-  transition: background-color 0.4s ease, color 0.4s ease;
-}
-
-/* Cards, seções e formulários seguem o tema */
-section, .card, form {
-  background: var(--cor-neutra);
-  color: var(--cor-texto);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-header, footer, nav {
-  background-color: var(--cor-primaria);
-  transition: background-color 0.3s ease;
-}
-
-/* Botões seguem o destaque */
-button, .botao {
-  background-color: var(--cor-destaque);
-  color: var(--cor-fundo);
-  transition: 0.3s ease;
-}
-
-button:hover, .botao:hover {
-  filter: brightness(1.2);
-}
-
-/* ==========================================================
-   🔳 ALTO CONTRASTE MODERNO
-   ========================================================== */
-
+/* Alto contraste */
 body.high-contrast {
-  --cor-fundo: #000;
-  --cor-texto: #fff;
-  --cor-primaria: #00e0ff;
-  --cor-secundaria: #00a896;
-  --cor-destaque: #ff006e;
-  --cor-neutra: #121212;
+  --bg-color: #000000 !important;
+  --text-color: #ffffff !important;
+  --card-bg: #000000 !important;
+  --accent-color: #ffff00 !important;
+  --border-color: #ffffff !important;
+  filter: contrast(130%) brightness(110%);
 }
 
-body.high-contrast * {
-  outline: none !important;
-  text-shadow: none !important;
+/* ================================
+   🎨 ELEMENTOS GERAIS
+   ================================ */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Inter", "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-body.high-contrast section,
-body.high-contrast .card,
-body.high-contrast form {
-  background: var(--cor-neutra);
-  border: 2px solid var(--cor-destaque);
-  color: var(--cor-texto);
+main, section {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  padding: 24px;
+  margin: 20px auto;
+  max-width: 1000px;
+  transition: background var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-body.high-contrast a {
-  color: var(--cor-destaque);
-  text-decoration: underline;
-  font-weight: bold;
+/* ================================
+   🖱️ LINKS E BOTÕES
+   ================================ */
+a, button {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: color var(--transition-speed), background-color var(--transition-speed), transform 0.2s;
 }
 
-/* ==========================================================
-   🌙 BOTÃO DE TROCA DE TEMA
-   ========================================================== */
-.theme-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--cor-primaria);
-  color: white;
-  font-size: 1.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  border: none;
+a:hover, button:hover {
+  color: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* Botões principais */
+button, .btn {
   cursor: pointer;
-  transition: 0.3s;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  background: var(--accent-color);
+  color: #fff;
+  font-weight: 500;
+  transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-.theme-toggle:hover {
-  transform: scale(1.1);
-  background: var(--cor-secundaria);
+button:hover, .btn:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 4px 12px rgba(0, 119, 255, 0.3);
 }
 
+/* ================================
+   🌓 BOTÕES DE TEMA E CONTRASTE
+   ================================ */
+#toggle-theme, #toggle-contrast {
+  cursor: pointer;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
+  transition: all var(--transition-speed);
+  font-size: 1rem;
+  margin: 6px;
+}
+
+#toggle-theme:hover, #toggle-contrast:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: scale(1.05);
+}
+
+/* Animação leve ao alternar tema */
+body {
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+/* ================================
+   🧭 CABEÇALHO / RODAPÉ
+   ================================ */
+header, footer {
+  text-align: center;
+  padding: 16px 0;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background var(--transition-speed);
+}
+
+footer {
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* ================================
+   📋 FORMULÁRIOS
+   ================================ */
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+  margin-top: 6px;
+  transition: border var(--transition-speed), box-shadow var(--transition-speed);
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.2);
+  outline: none;
+}
+
+.erro-validacao {
+  border-color: #ff4d4f !important;
+  box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.2);
+}
+
+.mensagem-erro {
+  color: #ff4d4f;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ================================
+   🌀 ANIMAÇÕES SUAVES
+   ================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+main {
+  animation: fadeIn 0.5s ease;
+}
+
+.pulse {
+  animation: pulseAnim 0.3s ease;
+}
+
+@keyframes pulseAnim {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}

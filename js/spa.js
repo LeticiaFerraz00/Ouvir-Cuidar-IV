@@ -114,32 +114,43 @@ function configurarDelegaçãoDeLinks() {
     });
 }
 
-// ** NOVO: 6. Acessibilidade - Toggle de Contraste **
-function configurarToggleAcessibilidade() {
-    const toggleButton = document.getElementById('toggle-contrast');
-    const body = document.body;
-    
-    // Carrega o estado salvo
-    if(localStorage.getItem('high-contrast') === 'enabled') {
-        body.classList.add('high-contrast');
-        toggleButton.textContent = '☀️'; // Ícone de sol para indicar que o modo escuro está ativo
-    } else {
-        toggleButton.textContent = '🌙'; // Ícone de lua para modo normal
-    }
+// ** NOVO: 6. Acessibilidade - Tema e Alto Contraste **
+function configurarAcessibilidade() {
+  const body = document.body;
+  const btnTema = document.getElementById("toggle-theme");
+  const btnContraste = document.getElementById("toggle-contrast");
 
-    toggleButton.addEventListener('click', function() {
-        if(body.classList.contains('high-contrast')) {
-            body.classList.remove('high-contrast');
-            localStorage.setItem('high-contrast', 'disabled');
-            toggleButton.textContent = '🌙'; // Volta para o ícone de lua
-        } else {
-            body.classList.add('high-contrast');
-            localStorage.setItem('high-contrast', 'enabled');
-            toggleButton.textContent = '☀️'; // Ícone de sol
-        }
+  // ======== MODO CLARO/ESCURO ========
+  function setTheme(theme) {
+    body.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    if (btnTema) btnTema.textContent = theme === "dark" ? "☀️" : "🌙";
+  }
+
+  const temaSalvo = localStorage.getItem("theme");
+  const prefereEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  setTheme(temaSalvo || (prefereEscuro ? "dark" : "light"));
+
+  if (btnTema) {
+    btnTema.addEventListener("click", () => {
+      const atual = body.getAttribute("data-theme");
+      const novo = atual === "dark" ? "light" : "dark";
+      setTheme(novo);
     });
-}
+  }
 
+  // ======== ALTO CONTRASTE ========
+  if (btnContraste) {
+    const contrasteAtivo = localStorage.getItem("highContrast") === "true";
+    if (contrasteAtivo) body.classList.add("high-contrast");
+
+    btnContraste.addEventListener("click", () => {
+      body.classList.toggle("high-contrast");
+      const ativo = body.classList.contains("high-contrast");
+      localStorage.setItem("highContrast", ativo ? "true" : "false");
+    });
+  }
+}
 
 // 7. Tratamento de Scripts Específicos (Máscara e Validação)
 function executarScripts(rota) {
@@ -364,8 +375,8 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarDelegaçãoDeLinks(); 
     
     // ** NOVO ** Inicializa o botão de acessibilidade de contraste
-    configurarToggleAcessibilidade();
-    
+    configurarAcessibilidade();
+            
     // 3. Roteia para a página atual (inicia o SPA)
     // CORREÇÃO: Extrai apenas o nome do arquivo da URL do GitHub Pages para inicialização
     const caminhoAtual = window.location.pathname;
@@ -379,3 +390,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     rotear(caminhoInicial, false);
 });
+

@@ -381,10 +381,6 @@ button:hover {
     color: var(--cor-texto);
 }
 
-/* O SEU CÓDIGO TINHA DUAS REGRAS PARA button:hover, removi a primeira e mantive a segunda */
-/* button:hover {
-    background: var(--cor-primaria);
-} */
 
 /* ==========================
    FOOTER
@@ -587,3 +583,119 @@ footer {
     padding: 5px 0;
     font-weight: bold;
 }
+
+/* ==========================================================
+   MODO CLARO E ESCURO - ELEGANTE + ACESSÍVEL
+   ========================================================== */
+
+/* 🌞 Modo Claro (padrão) */
+[data-theme="light"] {
+  --cor-fundo: #f8f9fa;
+  --cor-texto: #1a1a1a;
+  --cor-primaria: #006d77;
+  --cor-secundaria: #45827c;
+  --cor-destaque: #ffb703;
+  --cor-neutra: #e9ecef;
+}
+
+/* 🌙 Modo Escuro (suave e moderno) */
+[data-theme="dark"] {
+  --cor-fundo: #0e1113;
+  --cor-texto: #e9ecef;
+  --cor-primaria: #00adb5;
+  --cor-secundaria: #007b83;
+  --cor-destaque: #ffd369;
+  --cor-neutra: #1e2326;
+}
+
+/* 🎨 Estilo Global */
+body {
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Cards, seções e formulários seguem o tema */
+section, .card, form {
+  background: var(--cor-neutra);
+  color: var(--cor-texto);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+header, footer, nav {
+  background-color: var(--cor-primaria);
+  transition: background-color 0.3s ease;
+}
+
+/* Botões seguem o destaque */
+button, .botao {
+  background-color: var(--cor-destaque);
+  color: var(--cor-fundo);
+  transition: 0.3s ease;
+}
+
+button:hover, .botao:hover {
+  filter: brightness(1.2);
+}
+
+/* ==========================================================
+   🔳 ALTO CONTRASTE MODERNO
+   ========================================================== */
+
+body.high-contrast {
+  --cor-fundo: #000;
+  --cor-texto: #fff;
+  --cor-primaria: #00e0ff;
+  --cor-secundaria: #00a896;
+  --cor-destaque: #ff006e;
+  --cor-neutra: #121212;
+}
+
+body.high-contrast * {
+  outline: none !important;
+  text-shadow: none !important;
+}
+
+body.high-contrast section,
+body.high-contrast .card,
+body.high-contrast form {
+  background: var(--cor-neutra);
+  border: 2px solid var(--cor-destaque);
+  color: var(--cor-texto);
+}
+
+body.high-contrast a {
+  color: var(--cor-destaque);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* ==========================================================
+   🌙 BOTÃO DE TROCA DE TEMA
+   ========================================================== */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--cor-primaria);
+  color: white;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: var(--cor-secundaria);
+}
+

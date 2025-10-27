@@ -116,40 +116,61 @@ function configurarDelegaçãoDeLinks() {
 
 // ** NOVO: 6. Acessibilidade - Tema e Alto Contraste **
 function configurarAcessibilidade() {
-  const body = document.body;
-  const btnTema = document.getElementById("toggle-theme");
-  const btnContraste = document.getElementById("toggle-contrast");
+  const body = document.body;
+  const btnTema = document.getElementById("toggle-theme");
+  const btnContraste = document.getElementById("toggle-contrast");
 
-  // ======== MODO CLARO/ESCURO ========
-  function setTheme(theme) {
-    body.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-    if (btnTema) btnTema.textContent = theme === "dark" ? "☀️" : "🌙";
-  }
+  // ======== MODO CLARO/ESCURO ========
+  function setTheme(theme) {
+    body.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    // Feedback visual para o botão de tema
+    if (btnTema) btnTema.textContent = theme === "dark" ? "☀️" : "🌙";
+  }
 
-  const temaSalvo = localStorage.getItem("theme");
-  const prefereEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  setTheme(temaSalvo || (prefereEscuro ? "dark" : "light"));
+  // 1. Inicializa o Tema
+  const temaSalvo = localStorage.getItem("theme");
+  const prefereEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  setTheme(temaSalvo || (prefereEscuro ? "dark" : "light"));
 
-  if (btnTema) {
-    btnTema.addEventListener("click", () => {
-      const atual = body.getAttribute("data-theme");
-      const novo = atual === "dark" ? "light" : "dark";
-      setTheme(novo);
-    });
-  }
+  if (btnTema) {
+    btnTema.addEventListener("click", () => {
+      // O Alto Contraste não pode coexistir com o Modo Escuro/Claro "normal"
+      body.classList.remove("high-contrast");
+      localStorage.setItem("highContrast", "false");
+      
+      const atual = body.getAttribute("data-theme");
+      const novo = atual === "dark" ? "light" : "dark";
+      setTheme(novo);
+    });
+  }
 
-  // ======== ALTO CONTRASTE ========
-  if (btnContraste) {
-    const contrasteAtivo = localStorage.getItem("highContrast") === "true";
-    if (contrasteAtivo) body.classList.add("high-contrast");
+  // ======== ALTO CONTRASTE ========
+  if (btnContraste) {
+    // 2. Inicializa o Alto Contraste
+    const contrasteAtivo = localStorage.getItem("highContrast") === "true";
+    if (contrasteAtivo) {
+      body.classList.add("high-contrast");
+      btnContraste.textContent = "❌"; // Exibe "X" para desligar
+    } else {
+      btnContraste.textContent = "👁️"; // Exibe o olho para ligar
+    }
 
-    btnContraste.addEventListener("click", () => {
-      body.classList.toggle("high-contrast");
-      const ativo = body.classList.contains("high-contrast");
-      localStorage.setItem("highContrast", ativo ? "true" : "false");
-    });
-  }
+    btnContraste.addEventListener("click", () => {
+      // O Alto Contraste deve sobrescrever e desabilitar o Modo Escuro normal
+      body.removeAttribute("data-theme");
+      localStorage.setItem("theme", "light"); // Reseta o tema para 'light'
+      setTheme("light"); // Atualiza o visual do botão de tema
+
+      body.classList.toggle("high-contrast");
+      const ativo = body.classList.contains("high-contrast");
+      localStorage.setItem("highContrast", ativo ? "true" : "false");
+      btnContraste.textContent = ativo ? "❌" : "👁️"; // Atualiza o feedback visual do botão de contraste
+
+      // ACESSIBILIDADE: Move o foco para o corpo do documento para que o leitor de tela perceba a mudança imediata.
+      document.getElementById(MAIN_CONTENT_ID).focus();
+    });
+  }
 }
 
 // 7. Tratamento de Scripts Específicos (Máscara e Validação)
@@ -390,4 +411,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     rotear(caminhoInicial, false);
 });
+
 

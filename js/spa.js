@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarDelegaçãoDeLinks(); 
     
     // ** NOVO ** Inicializa o botão de acessibilidade de contraste
-   configurarAcessibilidade();();
+   configurarAcessibilidade();
     
     // 3. Roteia para a página atual (inicia o SPA)
     // CORREÇÃO: Extrai apenas o nome do arquivo da URL do GitHub Pages para inicialização
@@ -390,3 +390,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     rotear(caminhoInicial, false);
 });
+

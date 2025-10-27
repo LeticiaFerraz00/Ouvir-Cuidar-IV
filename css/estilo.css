@@ -1,7 +1,7 @@
-/* ==========================
+/* ===========================
    SISTEMA DE DESIGN - OUVIR & CUIDAR
    (VERSÃO AJUSTADA PARA TEMAS E ALTO CONTRASTE)
-   ========================== */
+   =========================== */
 
 /* --------------------------
    SUAS VARIÁVEIS ORIGINAIS
@@ -36,7 +36,7 @@
     /* Limite de Largura para o Conteúdo Centralizado */
     --largura-max-conteudo: 900px; 
 
-    /* --- Variáveis de tema (mapeadas para manter visual padrão) --- */
+    /* --- Variáveis de tema (MODO CLARO) --- */
     --bg-color: var(--cor-fundo);
     --text-color: var(--cor-texto);
     --card-bg: #ffffff;
@@ -45,6 +45,9 @@
     --border-color: var(--cor-neutra);
     --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.05);
     --transition-speed: 0.35s;
+
+    /* --- Variáveis de Cabeçalho e Rodapé (Para texto claro sobre fundo colorido) --- */
+    --header-footer-text-color: #ffffff; /* Texto branco padrão */
 }
 
 /* --------------------------
@@ -74,23 +77,23 @@ body[data-theme="dark"] {
 }
 
 /* --------------------------
-   ALTO CONTRASTE
+   ALTO CONTRASTE (CORRIGIDO)
    -------------------------- */
 body.high-contrast {
-    /* uso !important para garantir prioridade onde aplicável */
+    /* Mapeamento simples de cores para garantir alta legibilidade */
     --bg-color: #000000 !important;
-    --text-color: #ffff00 !important;
+    --text-color: #ffffff !important; /* Branco puro, mais legível */
     --card-bg: #000000 !important;
-    --accent-color: #ffff00 !important;
-    --accent-hover: #ffff00 !important;
+    --accent-color: #ffff00 !important; /* Amarelo no destaque (botões, links) */
+    --accent-hover: #ffffff !important;
     --border-color: #ffffff !important;
     --shadow-soft: none !important;
-    filter: contrast(130%) brightness(110%);
+    --header-footer-text-color: #000000 !important; /* Texto preto sobre fundo amarelo */
 }
 
-/* ==========================
+/* ===========================
    ESTILOS GERAIS (USANDO VARIÁVEIS DE TEMA)
-   ========================== */
+   =========================== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -101,11 +104,11 @@ body {
     transition: background-color var(--transition-speed), color var(--transition-speed);
 }
 
-/* Centralização do Header e Navegação - mantive sua aparência original,
-   mas passando a cor para variáveis para que o contraste funcione */
+/* Centralização do Header e Navegação */
 header {
-    background-color: var(--accent-color); /* antes: var(--cor-primaria) */
-    color: var(--text-color);
+    background-color: var(--accent-color);
+    /* CORREÇÃO: Usa a nova variável para texto em header/footer */
+    color: var(--header-footer-text-color); 
     padding: var(--espaco-3) var(--espaco-2);
     text-align: center;
     transition: background-color var(--transition-speed), color var(--transition-speed);
@@ -113,11 +116,13 @@ header {
 header h1 {
     font-size: var(--tamanho-subtitulo);
     margin-bottom: var(--espaco-1);
+    /* CORREÇÃO: Garante que o texto do H1 use a cor do header */
+    color: inherit; 
 }
 
 /* NAV - mantido visual, mas texto passa a usar variáveis */
 nav {
-    background-color: var(--cor-secundaria); /* mantive cor secundária do design */
+    background-color: var(--cor-secundaria); 
     padding: var(--espaco-2) 0;
 }
 nav ul {
@@ -130,16 +135,16 @@ nav ul {
 }
 nav a {
     text-decoration: none;
-    color: white; /* nav é colorida por design */
+    color: white; /* nav é colorida por design, texto fixo branco */
     font-weight: bold;
     transition: 0.3s;
     font-size: var(--tamanho-texto);
 }
 nav a:hover { color: var(--cor-destaque); }
 
-/* ==========================
+/* ===========================
    CONTEÚDO PRINCIPAL (MAIN)
-   ========================== */
+   =========================== */
 main {
     max-width: var(--largura-max-conteudo);
     margin: 0 auto;
@@ -157,7 +162,7 @@ h2 {
 section {
     margin-bottom: var(--espaco-5);
     padding: var(--espaco-4);
-    background: var(--card-bg); /* antes: white */
+    background: var(--card-bg);
     border-radius: 12px;
     box-shadow: var(--shadow-soft);
     transition: background var(--transition-speed), color var(--transition-speed);
@@ -180,9 +185,9 @@ main img {
     display: block;
 }
 
-/* ==========================
+/* ===========================
    MENU RESPONSIVO
-   ========================== */
+   =========================== */
 .menu-btn { display: none; font-size: 1.8rem; cursor: pointer; }
 
 @media (max-width: 768px) {
@@ -191,9 +196,9 @@ main img {
     section p { text-align: left; }
 }
 
-/* ==========================
+/* ===========================
    CARDS DE PROJETOS
-   ========================== */
+   =========================== */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -210,9 +215,9 @@ main img {
 .card:hover { transform: translateY(-5px); }
 .card img { width: 100%; border-radius: 10px; margin-bottom: var(--espaco-2); }
 
-/* ==========================
+/* ===========================
    FORMULÁRIOS
-   ========================== */
+   =========================== */
 form {
     background: var(--card-bg);
     padding: var(--espaco-4) var(--espaco-5);
@@ -256,19 +261,20 @@ button {
 }
 button:hover { background: var(--cor-destaque); color: var(--text-color); }
 
-/* ==========================
+/* ===========================
    FOOTER
-   ========================== */
+   =========================== */
 footer {
     background: var(--accent-color);
-    color: var(--text-color);
+    /* CORREÇÃO: Usa a nova variável para texto em header/footer */
+    color: var(--header-footer-text-color); 
     text-align: center;
     padding: var(--espaco-3);
 }
 
-/* ==========================
+/* ===========================
    BOTÕES / LINKS ESTILOS
-   ========================== */
+   =========================== */
 .botao {
     display: inline-block;
     background: var(--cor-destaque);
@@ -282,9 +288,9 @@ footer {
 }
 .botao:hover { background: #ffc94d; }
 
-/* ==========================
+/* ===========================
    SEÇÃO SOBRE (mantive gradiente mas forço texto com variável)
-   ========================== */
+   =========================== */
 #sobre {
     background: linear-gradient(135deg, var(--cor-primaria) 30%, var(--cor-secundaria) 100%);
     color: var(--card-bg); /* usa cor clara do card para contraste com gradiente */
@@ -298,9 +304,6 @@ footer {
 #sobre p { color: var(--card-bg); }
 #sobre strong { color: var(--text-color); font-weight:700; }
 
-/* ==========================
-
-   ========================== */
 /* ================================
    🌟 MISSÃO, VISÃO E VALORES
    ================================ */
@@ -361,45 +364,61 @@ footer {
         flex-basis: 100%;
     }
 }
-/* ==========================
+/* ===========================
    ERROS E MENSAGENS
-   ========================== */
+   =========================== */
 .erro-validacao {
-    border: 2px solid #e74c3c !important;
-    background-color: #fcebeb;
+    /* Mapeamento de Alto Contraste para Erro */
+    border: 2px solid var(--cor-erro) !important;
+    background-color: var(--cor-neutra);
     box-shadow: 0 0 5px rgba(231,76,60,0.5);
 }
-.mensagem-erro { color: #c0392b; font-size:0.9em; margin-top:-10px; margin-bottom:15px; padding:5px 0; font-weight:bold; }
-
-/* ==========================
-   TEMA MODERNO (reafirmando variáveis)
-   ========================== */
-:root {
-  /* reafirmar se necessário - mantive mapeamento a partir de suas cores originais */
-  --transition-speed: 0.35s;
+body.high-contrast .erro-validacao {
+    border-color: #ffffff !important;
+    background-color: #000000 !important;
+}
+.mensagem-erro { 
+    color: var(--cor-erro); 
+    font-size:0.9em; 
+    margin-top:-10px; 
+    margin-bottom:15px; 
+    padding:5px 0; 
+    font-weight:bold; 
 }
 
-/* ==========================
+/* ===========================
    LINKS E BOTÕES (com suporte alto-contraste)
-   ========================== */
-a, button, .btn, .botao { color: var(--accent-color); transition: color var(--transition-speed), background-color var(--transition-speed); }
+   =========================== */
+a, button, .btn, .botao { 
+    color: var(--accent-color); 
+    transition: color var(--transition-speed), background-color var(--transition-speed); 
+}
 a:hover, button:hover, .btn:hover, .botao:hover { color: var(--accent-hover); }
 
-button, .btn, .botao { background-color: var(--accent-color); color: #fff; }
-body.high-contrast button, body.high-contrast .btn, body.high-contrast .botao {
-    background-color: var(--accent-color) !important;
-    color: #000 !important;
+button, .btn, .botao { 
+    background-color: var(--accent-color); 
+    color: #fff; 
 }
 
-/* ==========================
+/* CORREÇÃO: Garante o contraste dos botões no modo alto contraste */
+body.high-contrast button, body.high-contrast .btn, body.high-contrast .botao {
+    background-color: var(--accent-color) !important; /* Amarelo */
+    color: #000000 !important; /* Texto preto para contraste no botão amarelo */
+    border: 2px solid #000000 !important;
+}
+body.high-contrast a:hover {
+    color: var(--text-color) !important; /* Branco para hover no texto normal */
+}
+
+/* ===========================
    ANIMAÇÕES SUAVES
-   ========================== */
+   =========================== */
 @keyframes fadeIn { from { opacity:0; transform:translateY(5px);} to { opacity:1; transform:translateY(0);} }
 main { animation: fadeIn 0.5s ease; }
 .pulse { animation: pulseAnim 0.3s ease; }
 @keyframes pulseAnim { 0% { transform:scale(1);} 50%{transform:scale(1.1);} 100%{transform:scale(1);} }
 
- ================================
+/* ================================
    BOTÃO "SALTAR PARA O CONTEÚDO PRINCIPAL"
    ================================ */
 #skip-to-content {
@@ -407,7 +426,7 @@ main { animation: fadeIn 0.5s ease; }
   top: 16px;
   left: 16px;
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--header-footer-text-color); /* Usa a variável que garante contraste */
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: bold;
@@ -421,7 +440,7 @@ main { animation: fadeIn 0.5s ease; }
   font-size: 1rem;
 
   /* Tornando o botão perceptível para leitores de tela */
-  aria-label: "Saltar para o conteúdo principal";
+  /* aria-label: "Saltar para o conteúdo principal"; -> REMOVIDO DO CSS, DEVE ESTAR NO HTML */
 }
 
 /* Ao receber foco (tab navigation) */
@@ -446,6 +465,6 @@ body[data-theme="dark"] #skip-to-content {
 
 body.high-contrast #skip-to-content {
   background-color: #ffff00 !important;
-  color: #000 !important;
-  outline: 3px solid #000 !important;
+  color: #000000 !important; /* Texto preto sobre fundo amarelo */
+  outline: 3px solid #000000 !important;
 }
